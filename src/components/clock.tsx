@@ -1,0 +1,63 @@
+import { cn } from "@/lib/utils";
+import { useState, useEffect } from "react";
+import { Text } from "../components/ui/text";
+
+const isoDateFormat = new Intl.DateTimeFormat("en-GB", {
+  timeStyle: "medium",
+})
+
+export function Clock({ className, iso }: { className?: string; iso?: boolean }) {
+  const [time, setTime] = useState(Date.now());
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout | null = null;
+
+    const startInterval = () => {
+      if (!interval) {
+        interval = setInterval(() => setTime(Date.now()), 1000);
+      }
+    };
+    const stopInterval = () => {
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+      }
+    };
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        startInterval();
+        setTime(Date.now());
+      } else {
+        stopInterval();
+      }
+    };
+
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    startInterval();
+
+    return () => {
+      stopInterval();
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
+
+  return (
+    <Text className={cn("font-mono", className)}>
+      {iso
+        ? isoDateFormat.format(time)
+        : new Date(time).toLocaleTimeString(navigator.language)
+      }
+    </Text>
+  )
+}
+
+export const dateFormatOptions: Intl.DateTimeFormatOptions = {
+  day: '2-digit',
+  month: 'long',
+  year: 'numeric',
+  weekday: 'long',
+}
+
+export const getCurrentDate = (format?: Intl.DateTimeFormatOptions) => {
+  return new Date().toLocaleDateString(navigator.language, { ...dateFormatOptions, ...format });
+};
