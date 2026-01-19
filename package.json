@@ -4,7 +4,8 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev:desktop": "npm run tauri dev",
+    "desktop:dev": "npm run tauri dev",
+    "desktop:build": "npm run tauri build",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",

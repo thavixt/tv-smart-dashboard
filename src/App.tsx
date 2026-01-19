@@ -1,5 +1,5 @@
 import "./App.css";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 // import { invoke } from "@tauri-apps/api/core";
 import { CurrencyWidget } from "./components/widgets/currencyWidget";
 import { CameraWidget } from "./components/widgets/cameraWidget";

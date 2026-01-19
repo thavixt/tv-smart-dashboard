@@ -35,10 +35,10 @@ export async function getRssFeed({ url }: {
     const items = xmlDoc.querySelectorAll("item");
     const results: RssItem[] = [];
     items.forEach(item => {
-      const title = item.querySelector("title")!.textContent;
-      const link = item.querySelector("link")!.textContent;
-      const description = item.querySelector("description")!.textContent;
-      const pubDate = item.querySelector("pubDate")!.textContent;
+      const title = item.querySelector("title")!.textContent as string;
+      const link = item.querySelector("link")!.textContent as string;
+      const description = item.querySelector("description")!.textContent as string;
+      const pubDate = item.querySelector("pubDate")!.textContent as string;
       results.push({
         title,
         link,
