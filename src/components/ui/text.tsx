@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { ReactNode } from "react";
 
-export const TEXT_STYLES = "bg-gray-950 p-2 rounded-md";
+export const TEXT_STYLES = "bg-gray-950 p-4 rounded-md";
 
 interface TextProps {
   children: ReactNode;

@@ -15,14 +15,14 @@ export function WeatherWidget({ className, slim = false }: { className?: string,
   return (
     <div className={cn("flex flex-col items-center justify-center relative rounded-md p-4", { "border": !slim }, className)}>
       {(weatherData && !isLoading) ? (
-        <div className="flex flex-col gap-2 items-center">
-          <Text className="font-bold text-lg">
-            {weatherData.location.country}, {weatherData.location.region}
-          </Text>
-          <Text className="flex items-center">
+        <div className="flex flex-col gap-2 items-center *:w-64">
+          <Text className="flex flex-col">
+            <span className=" font-bold text-xl">
+              {weatherData.location.country}, {weatherData.location.region}
+            </span>
             <span title="Conditions">{weatherData.current.temp_c}°C - {weatherData.current.condition.text}</span>
           </Text>
-          <Text className="w-full flex justify-between">
+          <Text className="w-full flex justify-between gap-2">
             <small title="Wind">
               Wind: {weatherData.current.wind_kph}km/h
             </small>
@@ -30,7 +30,7 @@ export function WeatherWidget({ className, slim = false }: { className?: string,
               Heat index: {weatherData.current.heatindex_c}°C
             </small>
           </Text>
-          <Text className="w-full flex justify-between">
+          <Text className="w-full flex justify-between gap-2">
             <small title="Precipitation">
               Precipitation: {weatherData.current.precip_mm}mm
             </small>

@@ -19,7 +19,7 @@ export function RssWidget({ className, rssUrl }: { className?: string; rssUrl: s
   const descriptions = data.map(article => `${article.description}`);
 
   return (
-    <div className={cn("w-full h-full flex flex-col items-center justify-end! gap-2 p-8", className)}>
+    <div className={cn("w-full h-full flex flex-col items-center justify-end! p-8", className)}>
       <RotatingText
         className={TEXT_STYLES}
         duration={TEXT_SLIDE_MS}
@@ -30,7 +30,7 @@ export function RssWidget({ className, rssUrl }: { className?: string; rssUrl: s
       <RotatingText
         className={TEXT_STYLES}
         duration={TEXT_SLIDE_MS}
-        style={{ fontStyle: "italic" }}
+        style={{ fontStyle: "italic", textAlign: "left", width: "100%" }}
         text={descriptions}
         transition={{ duration: 0.5, ease: "easeInOut" }}
       />
