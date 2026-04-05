@@ -10,15 +10,11 @@ export function ClockWidget({ className }: { className?: string }) {
   return (
     <div className={cn("flex flex-col md:flex-row gap-4 items-center justify-between", className)}>
       <div className="flex flex-col gap-2">
-        <div className="flex gap-4 text-4xl items-center justify-center">
-          <div className="flex flex-col gap-2 items-center">
-            <Text className="flex gap-2 whitespace-nowrap">
-              <div><CalendarDaysIcon size="48" /></div>
-              <div><span>{d1}, {d2}</span></div>
-            </Text>
-            <Clock className="p-4 text-7xl" iso />
-          </div>
-        </div>
+        <Text className="flex gap-4 text-4xl items-center justify-center">
+          <div><CalendarDaysIcon size="48" /></div>
+          <div><span>{d1}, {d2}</span></div>
+          <Clock className="p-4 text-7xl" iso />
+        </Text>
         <AiGreetingWidget className="row-span-2 col-span-2" />
       </div>
     </div>

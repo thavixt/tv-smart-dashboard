@@ -22,7 +22,7 @@ export async function askGemini(input: string, context: ChatMessage[] = []) {
   headers.append('Content-Type', 'application/json');
   try {
     const res = await fetch(
-      getApiRequestUrl('gemini'),
+      getApiRequestUrl('gemini', { app: '1' }),
       {
         method: "POST", body: JSON.stringify({ text: input, context }),
         headers,

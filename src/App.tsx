@@ -1,7 +1,10 @@
 import "./App.css";
 import { useRef } from "react";
+/**
+ * @todo move apis to tauri/rust backend
+ */
 // import { invoke } from "@tauri-apps/api/core";
-import { CurrencyWidget } from "./components/widgets/currencyWidget";
+// import { CurrencyWidget } from "./components/widgets/currencyWidget";
 import { CameraWidget } from "./components/widgets/cameraWidget";
 import { ClockWidget } from "./components/widgets/clockWidget";
 import { RssWidget } from "./components/widgets/rssWidget";
@@ -14,10 +17,10 @@ const rssUrl2 = "https://telex.hu/rss/archivum?filters=%7B%22superTagSlugs%22%3A
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      gcTime: 1000 * 60 * 60 * 12, // 12 hours
+      gcTime: 30 * 60 * 1000, // 30 minutes
       networkMode: 'online',
       retry: 3,
-      staleTime: 30 * 60 * 1000, // 30 minutes
+      staleTime: 30 * 60 * 1000, // 10 minutes
     },
   },
 });
@@ -37,14 +40,16 @@ function App() {
       <main
         ref={ref}
         id="fullscreenDashboard"
-        className="relative z-20 w-full h-full grid grid-cols-4 grid-rows-3 gap-12 *:flex *:items-center *:justify-center *:w-full *:h-full text-white"
+        className="relative z-20 w-full h-full grid grid-cols-10 grid-rows-10 gap-12 *:flex *:items-center *:justify-center *:w-full *:h-full text-white p-12"
       >
-        <CurrencyWidget className="row-span-1 col-span-1" />
-        <ClockWidget className="row-span-1 col-span-2 px-4" />
-        <WeatherWidget slim className="row-span-1 col-span-1" />
-        {/* <div className="row-span-1 col-span-full" />  */} {/* placeholder grid row */}
-        <RssWidget className="row-span-2 col-span-2" rssUrl={rssUrl1} />
-        <RssWidget className="row-span-2 col-span-2" rssUrl={rssUrl2} />
+        {/* <CurrencyWidget className="row-span-1 col-span-1" /> */}
+        <ClockWidget className="row-span-3 col-span-7 px-4" />
+        <WeatherWidget slim className="row-span-3 col-span-3" />
+
+        <div className="row-span-4 col-span-10" />  {/* placeholder grid row */}
+        <RssWidget className="row-span-3 col-span-5" rssUrl={rssUrl1} />
+        <RssWidget className="row-span-3 col-span-5" rssUrl={rssUrl2} />
+
         <CameraWidget className="absolute inset-0 size-full -z-10 opacity-100 grayscale-75" />
       </main>
     </QueryClientProvider>

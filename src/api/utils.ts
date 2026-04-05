@@ -2,6 +2,8 @@ type ApiEndpoint =
   | 'gemini'
   | 'weather'
   | 'weather_forecast'
+  | 'geolocation'
+  | 'ip'
   | 'ping';
 
 const apiUrl = "http://localhost:8080/api";

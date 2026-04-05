@@ -27,7 +27,5 @@ const getCurrencyApiUrl = (baseCurrency = "huf") => {
 
 export async function getExchangeRates(baseCurrency = "huf"): Promise<CurrencyExchangeResponse> {
   const res = await fetch(getCurrencyApiUrl(baseCurrency));
-  const json = await res.json();
-  console.log(json);
-  return json;
+  return res.json();
 }

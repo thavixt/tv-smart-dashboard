@@ -8,12 +8,11 @@ export function useAiGreeting() {
   const condition = weatherData?.current.condition.text.toLowerCase();;
   const city = weatherData?.location.name;
   const country = weatherData?.location.country;
-  const time = new Date().toDateString();
+  const time = new Date().toLocaleTimeString();
+  const date = new Date().toDateString();
   const template = [
-    `It's ${time} in ${city}, ${country}, the temperature is ${temp} °C, with ${condition} conditions outside.`,
+    `It's ${time}, ${date} in ${city}, ${country}, the temperature is ${temp} °C, with ${condition} conditions outside.`,
     "Tell me a relevant, funny or snarky greeting to start my day with in a single sentence.",
-    // "Separate sentences with two line breaks. Make it 2 sentences long, and include a single emoji.",
-    // "If there's an interesting historical fact about this day, tell me about it."
   ].join("\n");
 
   const { data, isLoading } = useQuery(

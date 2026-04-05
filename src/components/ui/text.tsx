@@ -1,14 +1,9 @@
 import { cn } from "@/lib/utils";
-import { ReactNode } from "react";
+import { HTMLAttributes } from "react";
 
-export const TEXT_STYLES = "bg-gray-950 p-4 rounded-md";
+export const TEXT_STYLES = "bg-slate-950 p-4 rounded-md";
 
-interface TextProps {
-  children: ReactNode;
-  className?: string;
-}
-
-export function Text({ children, className }: TextProps) {
+export function Text({ children, className }: HTMLAttributes<HTMLDivElement>) {
   return (
     <div className={cn(TEXT_STYLES, className)}>{children}</div>
   );

@@ -7,8 +7,9 @@ const headers = new Headers();
 headers.append('Content-Type', 'application/json');
 
 export function useWeather() {
-  const location = useLocation();
+  const { data: location, isPending: locationPending } = useLocation();
   const { data, isPending } = useQuery({
+    enabled: !locationPending,
     queryFn: async () => {
       const response = await fetch(getApiRequestUrl('weather', { location: location! }), { headers });
       const json = await response.json() as WeatherCurrentResponse;
@@ -16,7 +17,6 @@ export function useWeather() {
     },
     queryKey: ["weather"],
     staleTime: 10 * 60 * 1000,
-    enabled: !!location,
   });
   return { data, isPending };
 }

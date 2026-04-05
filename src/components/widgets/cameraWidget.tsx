@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import Webcam from "react-webcam";
-import { cn } from "../../lib/utils";
+import { cn, LOG_PREFIX } from "../../lib/utils";
 
 const videoConstraints = {
   width: 1280,
@@ -8,10 +8,12 @@ const videoConstraints = {
   facingMode: "user"
 };
 
+const SMART_TV_ID = import.meta.env.VITE_SMART_TV_ID;
+
 export function CameraWidget({ className }: { className?: string }) {
   const ref = useRef<Webcam>(null);
   const onUserMedia = (stream: MediaStream) => {
-    console.log("Video stream track id", stream.id);
+    console.info(`${LOG_PREFIX} video stream track id:`, stream.id, `for device [${SMART_TV_ID}]`);
   }
 
   return (
