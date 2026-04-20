@@ -1,7 +1,7 @@
 import { cn } from "@/lib/utils";
 import { HTMLAttributes } from "react";
 
-export const TEXT_STYLES = "bg-slate-950 p-4 rounded-md";
+export const TEXT_STYLES = "text-left";
 
 export function Text({ children, className }: HTMLAttributes<HTMLDivElement>) {
   return (

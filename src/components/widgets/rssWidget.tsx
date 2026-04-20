@@ -4,7 +4,7 @@ import { cn } from "../../lib/utils";
 import { RotatingText } from "../ui/rotating-text";
 import { TEXT_STYLES } from "../../components/ui/text";
 
-const TEXT_SLIDE_MS = 10 * 1000;
+const TEXT_SLIDE_MS = 30 * 1000;
 
 export function RssWidget({ className, rssUrl }: { className?: string; rssUrl: string }) {
   const { data, isLoading } = useRssFeed({ url: rssUrl })
@@ -15,23 +15,14 @@ export function RssWidget({ className, rssUrl }: { className?: string; rssUrl: s
     </div>
   }
 
-  const titles = data.map(article => article.title);
-  const descriptions = data.map(article => `${article.description}`);
+  const items = data.map(article => `${article.title} — ${new Date(article.pubDate).toLocaleTimeString()} — ${article.description}`);
 
   return (
     <div className={cn("w-full h-full flex flex-col items-center justify-end! p-8", className)}>
       <RotatingText
-        className={TEXT_STYLES}
+        className={`${TEXT_STYLES} italic text-ellipsis break-all`}
         duration={TEXT_SLIDE_MS}
-        style={{ fontWeight: "bold", fontSize: "1.35rem" }}
-        text={titles}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-      />
-      <RotatingText
-        className={TEXT_STYLES}
-        duration={TEXT_SLIDE_MS}
-        style={{ fontStyle: "italic", textAlign: "left", width: "100%" }}
-        text={descriptions}
+        text={items}
         transition={{ duration: 0.5, ease: "easeInOut" }}
       />
     </div>

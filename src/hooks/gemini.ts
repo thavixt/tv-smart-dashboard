@@ -12,15 +12,13 @@ export function useAiGreeting() {
   const date = new Date().toDateString();
   const template = [
     `It's ${time}, ${date} in ${city}, ${country}, the temperature is ${temp} °C, with ${condition} conditions outside.`,
-    "Tell me a relevant, funny or snarky greeting to start my day with in a single sentence.",
   ].join("\n");
 
   const { data, isLoading } = useQuery(
     {
+      enabled: !weatherLoading,
       queryKey: ["ai-greeting"],
       queryFn: () => askGemini(template),
-      staleTime: 30 * 60 * 1000, // 60min
-      enabled: !weatherLoading
     }
   );
 

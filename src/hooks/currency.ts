@@ -5,7 +5,6 @@ export function useCurrencyExchange(currency = "eur") {
     {
       queryKey: ["currency", currency],
       queryFn: () => getExchangeRates(currency),
-      staleTime: 30 * 60 * 1000, // 30min
     }
   );
   return { data, isPending };

@@ -13,39 +13,32 @@ export function WeatherWidget({ className, slim = false }: { className?: string,
   }
 
   return (
-    <div className={cn("flex flex-col items-end p-4 gap-4", { "border": !slim }, className)}>
+    <div className={cn("flex flex-col items-end p-4 gap-10", { "border": !slim }, className)}>
       <Text className="flex flex-col gap-2 w-fit">
         <span className="font-bold text-xl">
           {weatherData.location.country}, {weatherData.location.region}
         </span>
-        <span title="Conditions">{weatherData.current.temp_c}°C - {weatherData.current.condition.text}</span>
+        <span className="text-xl" title="Conditions">
+          {weatherData.current.temp_c}{'°C - '}{weatherData.current.condition.text}
+        </span>
       </Text>
-      <div className="grid grid-rows-2 grid-cols-2 gap-2">
-        <Text className="w-full" title="Heat index">
-          <div className="flex justify-between">
-            <span>Feels like:</span>
-            <span className="pl-4">{weatherData.current.feelslike_c}°C</span>
-          </div>
-        </Text>
-        <Text className="w-full" title="Humidity">
-          <div className="flex justify-between">
-            <span>Humidity:</span>
-            <span className="pl-4">{weatherData.current.humidity}%</span>
-          </div>
-        </Text>
-        <Text className="w-full" title="Wind">
-          <div className="flex justify-between">
-            <span>Wind:</span>
-            <span className="pl-4">{weatherData.current.wind_kph}km/h</span>
-          </div>
-        </Text>
-        <Text className="w-full" title="Precipitation">
-          <div className="flex justify-between">
-            <span>Precipitation:</span>
-            <span className="pl-4">{weatherData.current.precip_mm}mm</span>
-          </div>
-        </Text>
+      <div className="grid grid-rows-2 grid-cols-2 gap-4">
+        <Block title="Feels like" value={`${weatherData.current.feelslike_c}°C`} />
+        <Block title="Humidity" value={`${weatherData.current.humidity}%`} />
+        <Block title="Wind" value={`${weatherData.current.wind_kph}km/h`} />
+        <Block title="Precipitation" value={`${weatherData.current.precip_mm}mm`} />
       </div>
     </div>
+  )
+}
+
+function Block({ title, value }: { title: string, value: string }) {
+  return (
+    <Text className="w-full" title={`${title}: ${value}`}>
+      <div className="flex flex-col text-center">
+        <span>{title}:</span>
+        <span className="pl-4">{value}</span>
+      </div>
+    </Text>
   )
 }

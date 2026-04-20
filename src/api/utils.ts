@@ -6,14 +6,14 @@ type ApiEndpoint =
   | 'ip'
   | 'ping';
 
-const apiUrl = "http://localhost:8080/api";
-// const apiUrl = "https://personal.komlosidev.net/api";
-// const apiUrl = "https://corsproxy.io/?url=https://personal.komlosidev.net/api";
+const localApi = "http://localhost:8080/api";
+const apiUrl = "https://api.komlosidev.net/api";
+// const apiUrl = "https://corsproxy.io/?url=https://api.komlosidev.net/api";
 
 const getApi = () => {
-  // if (import.meta.env.MODE === "development") {
-  //   return localApi;
-  // }
+  if (import.meta.env.MODE === "development") {
+    return localApi;
+  }
   return apiUrl;
 }
 
