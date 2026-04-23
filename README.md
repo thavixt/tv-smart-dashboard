@@ -11,8 +11,14 @@ Designed as a kiosk-like display app for a large surface, connected to a PC/Rasp
 
 Develop the desktop app locally by running:
 
+to develop the desktop app, run: 
 ```
-npm run desktop:dev
+npm run tauri dev
+```
+
+To only develop the frontend web app, run:
+```
+npm run web:dev
 ```
 
 # Bundling

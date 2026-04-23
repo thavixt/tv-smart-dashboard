@@ -35,9 +35,9 @@ export function WeatherWidget({ className, slim = false }: { className?: string,
 function Block({ title, value }: { title: string, value: string }) {
   return (
     <Text className="w-full" title={`${title}: ${value}`}>
-      <div className="flex flex-col text-center">
+      <div className="flex flex-col text-left">
         <span>{title}:</span>
-        <span className="pl-4">{value}</span>
+        <span>{value}</span>
       </div>
     </Text>
   )
