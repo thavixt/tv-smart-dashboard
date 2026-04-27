@@ -15,12 +15,12 @@ export function RssWidget({ className, rssUrl }: { className?: string; rssUrl: s
     </div>
   }
 
-  const items = data.map(article => `${article.title} — ${new Date(article.pubDate).toLocaleTimeString()} — ${article.description}`);
+  const items = data.map(article => `${article.title} - ${article.description} - ${new Date(article.pubDate).toLocaleTimeString()}`);
 
   return (
     <div className={cn("w-full h-full flex flex-col items-center justify-end! p-8", className)}>
       <RotatingText
-        className={`${TEXT_STYLES} italic text-ellipsis break-all`}
+        className={`${TEXT_STYLES} italic text-ellipsis break-normal`}
         duration={TEXT_SLIDE_MS}
         text={items}
         transition={{ duration: 0.5, ease: "easeInOut" }}
