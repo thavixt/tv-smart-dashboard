@@ -15,7 +15,7 @@ export function AiGreetingWidget({ className }: { className?: string }) {
 
   return (
     <div className={cn("flex flex-col items-center justify-center w-full", className)}>
-      <Text className="whitespace-pre-wrap italic text-xl px-4 text-center w-full max-w-100">{greeting}</Text>
+      <Text className="whitespace-pre-wrap italic px-4 text-center w-full max-w-100">{greeting}</Text>
     </div>
   )
 }

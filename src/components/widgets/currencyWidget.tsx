@@ -20,15 +20,19 @@ export function CurrencyWidget({ className }: { className?: string }) {
     <div className={cn("h-full w-full flex flex-col font-mono p-8 gap-2", className)}>
       <div className="flex justify-start gap-4 w-full">
         <Text>{"eur/huf"}</Text>
-        <Text>{data.eur.huf.toFixed(2)}</Text>
+        <Text>{data.eur.huf.toFixed(3)}</Text>
       </div>
       <div className="flex justify-start gap-4 w-full">
         <Text>{"eur/usd"}</Text>
-        <Text>{data.eur.usd.toFixed(2)}</Text>
+        <Text>{data.eur.usd.toFixed(3)}</Text>
       </div>
       <div className="flex justify-start gap-4 w-full">
         <Text>{"eur/btc"}</Text>
-        <Text>{data.eur.btc.toFixed(8)}</Text>
+        <Text>{data.eur.btc.toFixed(6)}</Text>
+      </div>
+      <div className="flex justify-start gap-4 w-full">
+        <Text>{"eur/eth"}</Text>
+        <Text>{data.eur.eth.toFixed(6)}</Text>
       </div>
     </div>
   )

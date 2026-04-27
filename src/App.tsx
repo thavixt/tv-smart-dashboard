@@ -51,7 +51,7 @@ function App() {
         id="fullscreenDashboard"
         className="relative z-20 w-full h-full grid grid-cols-10 grid-rows-10 gap-12 *:flex *:items-center *:justify-center *:w-full *:h-full text-white p-12"
       >
-        <CurrencyWidget className="row-span-1 col-span-2" />
+        <CurrencyWidget className="row-span-3 col-span-2" />
         <ClockWidget className="row-span-3 col-span-6 px-4" />
         <WeatherWidget slim className="row-span-3 col-span-2" />
 

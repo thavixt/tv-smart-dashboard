@@ -10,16 +10,16 @@ export function Clock({ className, iso }: { className?: string; iso?: boolean })
   const [time, setTime] = useState(Date.now());
 
   useEffect(() => {
-    let interval: NodeJS.Timeout | null = null;
+    let interval: number | null = null;
 
     const startInterval = () => {
       if (!interval) {
-        interval = setInterval(() => setTime(Date.now()), 1000);
+        interval = window.setInterval(() => setTime(Date.now()), 1000);
       }
     };
     const stopInterval = () => {
       if (interval) {
-        clearInterval(interval);
+        window.clearInterval(interval);
         interval = null;
       }
     };

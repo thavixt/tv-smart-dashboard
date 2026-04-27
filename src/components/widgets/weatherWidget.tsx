@@ -15,24 +15,30 @@ export function WeatherWidget({ className, slim = false }: { className?: string,
   return (
     <div className={cn("flex flex-col items-end p-4 gap-10", { "border": !slim }, className)}>
       <Text className="flex flex-col gap-2 w-fit">
-        <span className="font-bold text-xl">
+        <span className="font-bold">
           {weatherData.location.country}, {weatherData.location.region}
         </span>
-        <span className="text-xl" title="Conditions">
+        <span title="Conditions">
           {weatherData.current.temp_c}{'°C - '}{weatherData.current.condition.text}
         </span>
+        <span title="Humidity">
+          Humidity{': '}{weatherData.current.humidity}%
+        </span>
+        <span title="Wind speed" >
+          Wind.{': '}{weatherData.current.wind_kph}km/h
+        </span>
       </Text>
-      <div className="grid grid-rows-2 grid-cols-2 gap-4">
+      {/* <div className="flex flex-col gap-2">
         <Block title="Feels like" value={`${weatherData.current.feelslike_c}°C`} />
         <Block title="Humidity" value={`${weatherData.current.humidity}%`} />
         <Block title="Wind" value={`${weatherData.current.wind_kph}km/h`} />
         <Block title="Precipitation" value={`${weatherData.current.precip_mm}mm`} />
-      </div>
+      </div> */}
     </div>
   )
 }
 
-function Block({ title, value }: { title: string, value: string }) {
+/* function Block({ title, value }: { title: string, value: string }) {
   return (
     <Text className="w-full" title={`${title}: ${value}`}>
       <div className="flex flex-col text-left">
@@ -41,4 +47,4 @@ function Block({ title, value }: { title: string, value: string }) {
       </div>
     </Text>
   )
-}
+} */
