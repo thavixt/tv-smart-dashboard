@@ -4,11 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "app:dev": "npm run tauri dev",
-    "app:build": "npm run tauri build",
-    "web:dev": "vite --host",
-    "web:build": "tsc && vite build",
-    "web:preview": "vite preview",
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
     "tauri": "tauri"
   },
   "dependencies": {

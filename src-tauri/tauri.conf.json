@@ -2,7 +2,7 @@
   "$schema": "https://schema.tauri.app/config/2",
   "productName": "tv-smart-dashboard",
   "version": "0.1.0",
-  "identifier": "com.peti.tv-smart-dashboard",
+  "identifier": "com.komlosidev.tv-smart-dashboard",
   "build": {
     "beforeDevCommand": "npm run dev",
     "devUrl": "http://localhost:1420",
@@ -13,8 +13,9 @@
     "windows": [
       {
         "title": "tv-smart-dashboard",
-        "width": 800,
-        "height": 600
+        "width": 1920,
+        "height": 1080,
+        "fullscreen": true
       }
     ],
     "security": {
