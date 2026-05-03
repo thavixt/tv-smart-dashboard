@@ -6,6 +6,7 @@ import { RssWidget } from "./components/widgets/rssWidget";
 import { WeatherWidget } from "./components/widgets/weatherWidget";
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { CurrencyWidget } from "./components/widgets/currencyWidget";
+import { Tile } from "./components/ui/tile";
 
 /**
  * @todo move apis to tauri/rust backend
@@ -19,9 +20,8 @@ const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       networkMode: 'online',
-      retry: 3,
-      // refetchInterval: 10 * 60 * 1000,
-      refetchInterval: 5 * 60 * 1000,
+      retry: 1,
+      refetchInterval: 10 * 60 * 1000,
     },
   },
 });
@@ -49,17 +49,18 @@ function App() {
       <main
         ref={ref}
         id="fullscreenDashboard"
-        className="relative z-20 w-full h-full grid grid-cols-10 grid-rows-10 gap-12 *:flex *:items-center *:justify-center *:w-full *:h-full text-white p-12"
+        className="relative z-20 w-full h-full grid grid-cols-12 grid-rows-12 gap-4 text-white text-3xl p-12"
       >
-        <CurrencyWidget className="row-span-1 col-span-2" />
-        <ClockWidget className="row-span-3 col-span-6 px-4" />
-        <WeatherWidget slim className="row-span-3 col-span-2" />
+        <CameraWidget />
 
-        <div className="row-span-4 col-span-10" />  {/* placeholder grid row */}
-        <RssWidget className="row-span-3 col-span-5" rssUrl={rssUrl1} />
-        <RssWidget className="row-span-3 col-span-5" rssUrl={rssUrl2} />
+        <CurrencyWidget w={4} h={4} />
+        <ClockWidget w={4} h={4} />
+        <WeatherWidget w={4} h={4} />
 
-        <CameraWidget className="absolute inset-0 size-full -z-10 opacity-100 grayscale-75" />
+        <Tile w={12} h={3} />
+
+        <RssWidget w={6} h={5} url={rssUrl1} />
+        <RssWidget w={6} h={5} url={rssUrl2} />
       </main>
     </QueryClientProvider>
   );

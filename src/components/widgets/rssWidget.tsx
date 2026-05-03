@@ -1,30 +1,30 @@
-import { LoaderCircle } from "lucide-react";
 import { useRssFeed } from "../../hooks/rss";
-import { cn } from "../../lib/utils";
 import { RotatingText } from "../ui/rotating-text";
-import { TEXT_STYLES } from "../../components/ui/text";
+import { Tile, TileProps } from "../ui/tile";
 
 const TEXT_SLIDE_MS = 30 * 1000;
 
-export function RssWidget({ className, rssUrl }: { className?: string; rssUrl: string }) {
-  const { data, isLoading } = useRssFeed({ url: rssUrl })
+interface RssWidgetProps extends TileProps {
+  url: string
+}
 
-  if (!data || isLoading) {
-    return <div className={cn("flex flex-col", className)}>
-      <LoaderCircle className="animate-spin size-20 opacity-50" />
-    </div>
-  }
+export function RssWidget({ url, w, h }: RssWidgetProps) {
+  const { data, isLoading } = useRssFeed({ url })
 
-  const items = data.map(article => `${article.title} — ${new Date(article.pubDate).toLocaleTimeString()} — ${article.description}`);
+  const items = data?.map(article => [
+    new Date(article.pubDate).toLocaleTimeString(),
+    `${article.title}\n`,
+    article.description
+  ].join("\n"));
 
   return (
-    <div className={cn("w-full h-full flex flex-col items-center justify-end! p-8", className)}>
+    <Tile w={w} h={h} loading={isLoading} className="p-4">
       <RotatingText
-        className={`${TEXT_STYLES} italic text-ellipsis break-all`}
+        className="text-ellipsis whitespace-break-spaces"
         duration={TEXT_SLIDE_MS}
-        text={items}
+        text={items ?? []}
         transition={{ duration: 0.5, ease: "easeInOut" }}
       />
-    </div>
+    </Tile>
   )
 }

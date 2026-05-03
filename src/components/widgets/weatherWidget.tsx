@@ -1,44 +1,20 @@
 import { useWeather } from "@/hooks/weather";
-import { cn } from "@/lib/utils";
-import { LoaderCircle } from "lucide-react";
-import { Text } from "../../components/ui/text";
+import { Tile, TileProps } from "../ui/tile";
 
-export function WeatherWidget({ className, slim = false }: { className?: string, slim?: boolean }) {
-  const { data: weatherData, isPending: isLoading } = useWeather();
-
-  if (!weatherData || isLoading) {
-    return <div className={cn("flex flex-col", className)}>
-      <LoaderCircle className="animate-spin size-20 opacity-50" />
-    </div>
-  }
+export function WeatherWidget({ w, h }: TileProps) {
+  const { data: weatherData, isPending } = useWeather();
 
   return (
-    <div className={cn("flex flex-col items-end p-4 gap-10", { "border": !slim }, className)}>
-      <Text className="flex flex-col gap-2 w-fit">
-        <span className="font-bold text-xl">
-          {weatherData.location.country}, {weatherData.location.region}
-        </span>
-        <span className="text-xl" title="Conditions">
-          {weatherData.current.temp_c}{'°C - '}{weatherData.current.condition.text}
-        </span>
-      </Text>
-      <div className="grid grid-rows-2 grid-cols-2 gap-4">
-        <Block title="Feels like" value={`${weatherData.current.feelslike_c}°C`} />
-        <Block title="Humidity" value={`${weatherData.current.humidity}%`} />
-        <Block title="Wind" value={`${weatherData.current.wind_kph}km/h`} />
-        <Block title="Precipitation" value={`${weatherData.current.precip_mm}mm`} />
-      </div>
-    </div>
-  )
-}
-
-function Block({ title, value }: { title: string, value: string }) {
-  return (
-    <Text className="w-full" title={`${title}: ${value}`}>
-      <div className="flex flex-col text-center">
-        <span>{title}:</span>
-        <span className="pl-4">{value}</span>
-      </div>
-    </Text>
+    <Tile w={w} h={h} loading={isPending}>
+      {weatherData ? (
+        <>
+          <span>{weatherData.current.temp_c}{'°C - '}{weatherData.current.condition.text}</span>
+          <br />
+          <span>Humidity: {`${weatherData.current.humidity}%`}</span>
+          <span>Wind: {`${weatherData.current.wind_kph}km/h`}</span>
+          <span>Precipitation: {`${weatherData.current.precip_mm}mm`}</span>
+        </>
+      ) : null}
+    </Tile>
   )
 }

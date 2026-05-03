@@ -1,22 +1,19 @@
-import { CalendarDaysIcon } from "lucide-react";
-import { AiGreetingWidget } from "./aiGreetingWidget";
-import { cn } from "../../lib/utils";
+import { useWeather } from "@/hooks/weather";
 import { Clock, getCurrentDate } from "../clock";
-import { Text } from "../../components/ui/text";
+import { Tile, TileProps } from "../ui/tile";
 
-export function ClockWidget({ className }: { className?: string }) {
+export function ClockWidget({ w, h }: TileProps) {
   const date = getCurrentDate({ year: undefined });
-  const [d1, d2] = date.split(", ");
+  const { data: weatherData, isPending } = useWeather();
+
   return (
-    <div className={cn("flex flex-col md:flex-row gap-4 items-center justify-between", className)}>
-      <div className="flex flex-col gap-2">
-        <Text className="flex gap-4 text-4xl items-center justify-center">
-          <div><CalendarDaysIcon size="48" /></div>
-          <div><span>{d1}, {d2}</span></div>
-          <Clock className="p-4 text-7xl" iso />
-        </Text>
-        <AiGreetingWidget className="row-span-2 col-span-2" />
-      </div>
-    </div>
-  )
+    <Tile w={w} h={h} loading={isPending}>
+      <Clock iso className="font-bold text-6xl" />
+      <br />
+      <span>{date}</span>
+      <span>
+        {weatherData ? `${weatherData.location.country}, ${weatherData.location.region}` : null}
+      </span>
+    </Tile>
+  );
 }

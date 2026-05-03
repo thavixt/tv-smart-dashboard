@@ -17,7 +17,7 @@ export function CameraWidget({ className }: { className?: string }) {
   }
 
   return (
-    <div className={cn(className, "w-full h-full")}>
+    <div className={cn(className, "w-full h-full absolute -z-10")}>
       <Webcam
         ref={ref}
         className="w-full h-full object-cover"

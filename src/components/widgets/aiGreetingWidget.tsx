@@ -1,21 +1,13 @@
 
-import { LoaderCircle } from "lucide-react";
 import { useAiGreeting } from "../../hooks/gemini";
-import { cn } from "../../lib/utils";
-import { Text } from "../../components/ui/text";
+import { Tile } from "../ui/tile";
 
-export function AiGreetingWidget({ className }: { className?: string }) {
+export function AiGreetingWidget() {
   const { data: greeting, isLoading } = useAiGreeting();
 
-  if (!greeting || isLoading) {
-    return <div className={cn("flex items-center justify-center w-full", className)}>
-      <LoaderCircle className="animate-spin size-20 opacity-50" />
-    </div>
-  }
-
   return (
-    <div className={cn("flex flex-col items-center justify-center w-full", className)}>
-      <Text className="whitespace-pre-wrap italic text-xl px-4 text-center w-full max-w-100">{greeting}</Text>
-    </div>
+    <Tile w={4} h={2} loading={isLoading}>
+      {greeting}
+    </Tile>
   )
 }
