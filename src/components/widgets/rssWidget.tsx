@@ -11,11 +11,13 @@ interface RssWidgetProps extends TileProps {
 export function RssWidget({ url, w, h }: RssWidgetProps) {
   const { data, isLoading } = useRssFeed({ url })
 
-  const items = data?.map(article => [
-    new Date(article.pubDate).toLocaleTimeString(),
-    `${article.title}\n`,
-    article.description
-  ].join("\n"));
+  const items = data?.map(article => {
+    const ts = new Date(article.pubDate).toLocaleTimeString();
+    return [
+      `<${ts}> ${article.title}`,
+      `\n${article.description}`
+    ].join("\n");
+  });
 
   return (
     <Tile w={w} h={h} loading={isLoading} className="p-4">
